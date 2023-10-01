@@ -1,19 +1,28 @@
-# src/betting_strategies.py
+class CustomFibonacciStrategy:
+    def __init__(self):
+        self.base_bets = {'black': 40, '2nd_column': 10, '3rd_dozen': 10}
+        self.current_index = 0  # Start at the first index of the Fibonacci sequence
+        self.previous_outcome = "win"
 
-class Fibonacci:
+    def calculate_bet(self, outcome):
+        if outcome == "win":
+            self.current_index = 0  # Reset the Fibonacci sequence index on a win
+        elif self.previous_outcome == "loss":
+            self.current_index += 1  # Move to the next number in the sequence on a loss
 
-    def __init__(self, base_bet=1):
-        self.fibonacci = [0, 1]
-        self.index = 0
-        self.base_bet = base_bet
+        self.previous_outcome = outcome
 
-    def next_bet(self, won_last=True):
-        if won_last:
-            self.index = max(0, self.index - 1)
-        else:
-            self.index += 1
-            if self.index >= len(self.fibonacci):
-                self.fibonacci.append(self.fibonacci[-1] + self.fibonacci[-2])
-        return self.fibonacci[self.index] * self.base_bet
+        # Calculate the Fibonacci multiplier
+        multiplier = self._fibonacci(self.current_index)
+
+        # Return bets scaled by the Fibonacci multiplier
+        return {k: v * multiplier for k, v in self.base_bets.items()}
+
+    def _fibonacci(self, n):
+        a, b = 0, 1
+        for _ in range(n):
+            a, b = b, a + b
+        return a
+
 
 
