@@ -11,18 +11,18 @@ from userbets import simulate_with_user_bets
 
 # Sample usage:
 bets = [
-    # {"type": "column", "value": 1, "amount": 5},
-    # {"type": "column", "value": 2, "amount": 5},
-    # {"type": "column", "value": 3, "amount": 5},
-    # {"type": "dozen", "value": 1, "amount": 5},
-    # {"type": "dozen", "value": 2, "amount": 5},
-    {"type": "dozen", "value": 3, "amount": 5},
+    # {"type": "column", "value": 1, "amount": 5}, #  <-- 1rd Column (player row)
+    # {"type": "column", "value": 2, "amount": 5}, #  <-- 2rd Column (middle row)
+    # {"type": "column", "value": 3, "amount": 5}, #  <-- 3rd Column (dealer row)
+    # {"type": "dozen", "value": 1, "amount": 5}, #  <-- 1rd Dozen (1 - 12)
+    # {"type": "dozen", "value": 2, "amount": 5}, #  <-- 2rd Dozen (13 - 24)
+    {"type": "dozen", "value": 3, "amount": 5}, #  <-- 3rd Dozen (25 - 36)
     # {"type": "color", "value": "red", "amount": 5},
     # {"type": "color", "value": "black", "amount": 10},
     # {"type": "zeros", "amount": 5}
 ]
-spins = 200
-initial_bankroll = 1000
+spins = 200 # <-- total number of spins to test
+initial_bankroll = 1000 # <-- Your starting bankroll each run
 
 final_bankroll, bankroll_history, bet_history = simulate_with_user_bets(
     bets, spins, initial_bankroll
